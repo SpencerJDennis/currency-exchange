@@ -3,26 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 
 // Business Logic
-function getWeather(city) {
-  let promise = WeatherService.getWeather(city);
-  promise.then(function(weatherDataArray) {
-    printElements(weatherDataArray);
-  }, function(errorArray) {
-    printError(errorArray);
-  });
-}
 
-function getWeatherPartTwo(lat, long) {
+function currencyExchange() {
   let promise = new Promise(function(resolve, reject) {
   let request = new XMLHttpRequest();
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.API_KEY}`;
+  const url = `https://v6.exchangerate-api.com/v6/234ac136b43917f74b1107c5/latest/USD?usd=${usd}&other=${other}&appid=${process.env.API_KEY}`;
 
   request.addEventListener("loadend", function() {
     const response = JSON.parse(this.responseText);
     if (this.status === 200) {
-      resolve([response, lat, long]);
+      resolve([response, usd, other]);
     } else {
-      reject([this, response, lat, long]);
+      reject([this, response, usd, other]);
     }
   });
 
@@ -30,24 +22,13 @@ function getWeatherPartTwo(lat, long) {
   request.send();
 });
 
-promise.then(function(weatherDataArray) {
-  printElementsTwo(weatherDataArray);
+promise.then(function() {
+  printElements();
 }, function(errorArray) {
-  printErrorTwo(errorArray);
+  printError(errorArray);
 });
 }
 // UI Logic
-
-
-function printElementsTwo(data) {
-  document.querySelector('#showResponse').innerText = `The humidity in lat ${data[1]} and long ${data[2]} is ${data[0].main.humidity}%. 
-  The temperature in Farenheit is ${1.8*(data[1].main.temp-273) + 32} degrees. It feels like ${1.8*(data[2].main.feels_like-273) + 32} Farenheit.`;
-}
-
-function printErrorTwo(error) {
-  document.querySelector('#showResponse').innerText = `There was an error accessing the weather data for lat ${error[2]} and long ${error[3]}: ${error[0].status} ${error[0].statusText}: ${error[1].message}`;
-}
-
 
 function printElements(data) {
   document.querySelector('#showResponse').innerText = `The humidity in ${data[1]} is ${data[0].main.humidity}%. 
@@ -58,7 +39,7 @@ function printError(error) {
   document.querySelector('#showResponse').innerText = `There was an error accessing the weather data for ${error[2]}: ${error[0].status} ${error[0].statusText}: ${error[1].message}`;
 }
 
-function handleFormSubmission(event) {
+/*function handleFormSubmission(event) {
   event.preventDefault();
   const city = document.querySelector('#location').value;
   const lat = parseInt(document.querySelector('#lat').value);
