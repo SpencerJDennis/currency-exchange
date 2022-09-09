@@ -4,29 +4,13 @@ import './css/styles.css';
 
 // Business Logic
 
-function currencyExchange() {
-  let promise = new Promise(function(resolve, reject) {
-  let request = new XMLHttpRequest();
-  const url = `https://v6.exchangerate-api.com/v6/234ac136b43917f74b1107c5/latest/USD?usd=${usd}&other=${other}&appid=${process.env.API_KEY}`;
-
-  request.addEventListener("loadend", function() {
-    const response = JSON.parse(this.responseText);
-    if (this.status === 200) {
-      resolve([response, usd, other]);
-    } else {
-      reject([this, response, usd, other]);
-    }
+function currencyExchange(usd, other) {
+  let promise = ExchangeRate.currencyExchange(usd, other);
+  promise.then(function() {
+    printElements();
+  }, function(errorArray) {
+    printError(errorArray);
   });
-
-  request.open("GET", url, true);
-  request.send();
-});
-
-promise.then(function() {
-  printElements();
-}, function(errorArray) {
-  printError(errorArray);
-});
 }
 // UI Logic
 
