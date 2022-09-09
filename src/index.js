@@ -31,8 +31,7 @@ promise.then(function() {
 // UI Logic
 
 function printElements(data) {
-  document.querySelector('#showResponse').innerText = `The humidity in ${data[1]} is ${data[0].main.humidity}%. 
-  The temperature in Farenheit is ${1.8*(data[0].main.temp-273) + 32} degrees. It feels like ${1.8*(data[0].main.feels_like-273) + 32} Farenheit.`;
+  document.querySelector('#showResponse').innerText = ``;
 }
 
 function printError(error) {
@@ -53,4 +52,4 @@ function printError(error) {
 
 window.addEventListener("load", function() {
   document.querySelector('form').addEventListener("submit", handleFormSubmission);
-});
+});*/
