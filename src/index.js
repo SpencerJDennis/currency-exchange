@@ -7,18 +7,18 @@ import ExchangeRate from './exchange-service.js';
 
 function currencyExchange(countryCurrency) {
   let promise = ExchangeRate.currencyExchange(countryCurrency);
-  promise.then(function(countryCurrencyDataArray) {
-    printElements(countryCurrencyDataArray);
+  promise.then(function(data) {
+    printElements(data);
   }, function(errorArray) {
     printError(errorArray);
   });
 }
 // UI Logic
 
-function printElements(data, countryCurrency) {
+function printElements(data) {
   document.querySelector('#showResponse').innerText = "";
-  if (countryCurrency.length === 3) {
-    let currencyRate = `${data[0].conversion_rates[countryCurrency]}`;
+  if (data[1].length === 3) {
+    let currencyRate = `${data[0].conversion_rates[data[1]]}`;
     let userInput = document.querySelector('#us-dollars').value;
     let convertedCurrency = userInput * currencyRate;
     document.querySelector('#showResponse').innerText = "Your converted currency amount is: $" + convertedCurrency;

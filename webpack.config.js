@@ -11,8 +11,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   devtool: 'eval-source-map',
-  devServer: {               
-    contentBase: './dist'    
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    compress: true,
+    port: 9000,
   },
   plugins: [
     new ESLintPlugin(),
