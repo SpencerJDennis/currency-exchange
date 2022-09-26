@@ -8,13 +8,14 @@
     <p></p>
     <form>
       <label for="us-dollars">Enter your dollar amount:</label>
-      <input id="us-dollars" type="text" name="dollars">
-      <select id = "country-currencry">  
-        <option>Euro</option>  
-        <option>Japanese Yen</option>  
-        <option>Canadian Dollar</option>  
-        <option>Ugandan Shilling</option>  
-        <option>Australian Dollar</option>  
+      <input id="us-dollars" type="number" name="us-dollars">
+      <select name="countryCurrency" id = "countryCurrencry">  
+        <option value="EUR">Euro</option>  
+        <option value="JPY">Japanese Yen</option>  
+        <option value="CAD">Canadian Dollar</option>  
+        <option value="UGX">Ugandan Shilling</option>  
+        <option value="AUD">Australian Dollar</option>
+        <option>cookies</option>  
       </select>  
       <button type="submit" class="button" id="conversion">Get your converted dollar amount!</button>
     </form>
